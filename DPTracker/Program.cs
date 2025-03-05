@@ -7,8 +7,9 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(ctx.Configuration));
-    builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration).EnableTokenAcquisitionToCallDownstreamApi().AddMicrosoftGraph(builder.Configuration.GetSection("Graph")).AddInMemoryTokenCaches();    
-    builder.Services.AddDbContext<DPTrackerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DPTrackerDB")));
+    builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration).EnableTokenAcquisitionToCallDownstreamApi().AddMicrosoftGraph(builder.Configuration.GetSection("Graph")).AddInMemoryTokenCaches();
+    //builder.Services.AddDbContext<DPTrackerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DPTrackerDB")));
+    builder.Services.AddDbContext<DPTrackerDbContext>(options => options.UseInMemoryDatabase("DPTrackerDB"));
     builder.Services.AddControllers();
     builder.Services.AddSpaStaticFiles(configure => configure.RootPath = "wwwroot");
 
