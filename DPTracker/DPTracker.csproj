@@ -4,7 +4,8 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<SpaRoot>frontend\</SpaRoot>
+		<Version>2025.3.5</Version>
+		<SpaRoot>frontend\</SpaRoot>		
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 		<UserSecretsId>06ce5589-e2e2-4194-8d47-faa2ca4beb3e</UserSecretsId>
 	</PropertyGroup>
