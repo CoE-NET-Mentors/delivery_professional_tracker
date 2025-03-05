@@ -404,4 +404,6 @@ package-lock.json
 .parcel-cache/
 node_modules/
 wwwroot/
-DPTracker/frontend/react/src/.env.development
+.env.development
+SetEnv.ps1
+
