@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {RecordType} from '../../constants/recordTypes';
 import {ApiService} from "../../services/ApiService.js";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function formatRecordType(recordType) {
     return recordType.replace(/([A-Z])/g, ' $1').trim();
@@ -48,7 +49,7 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
                 recordTypeId: parseInt(editFormData.recordType),
                 recordNotes: filteredNotes.map(note => ({
                     deliveryProfessionalRecordId: '00000000-0000-0000-0000-000000000000',
-                    createdAt: new Date(note.createdAt).toISOString(),
+                    createdAt: null,
                     createdBy: editFormData.createdBy,
                     note: note.note.trim()
                 }))
@@ -191,21 +192,25 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
                                     aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <div className="mb-3">
-                                <button
-                                    className="btn btn-primary me-2"
-                                    onClick={() => {
-                                        resetEditForm();
-                                        setSelectedRowId('new');
-                                    }}
-                                >
-                                    New Record
-                                </button>
-                                {selectedRowId && selectedRowId !== 'new' && (
-                                    <button className="btn btn-danger"
-                                            onClick={() => handleDeleteRecord(selectedRowId)}>
-                                        Delete Record
+                            <div className="mb-3 d-flex justify-content-between">
+                                <div>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => {
+                                            resetEditForm();
+                                            setSelectedRowId('new');
+                                        }}
+                                    >
+                                        New Record
                                     </button>
+                                </div>
+                                {selectedRowId && selectedRowId !== 'new' && (
+                                    <div>
+                                        <button className="btn btn-danger"
+                                                onClick={() => handleDeleteRecord(selectedRowId)}>
+                                            Delete Record
+                                        </button>
+                                    </div>
                                 )}
                             </div>
 
@@ -269,9 +274,8 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
 
                                     <h6 className="mt-3">Notes</h6>
                                     {editFormData.recordNotes.map((note, idx) => (
-                                        <div key={idx} className="row mb-2 align-items-end">
-                                            <div className="col-md-5">
-                                                <label className="form-label">Note</label>
+                                        <div key={idx} className="row mb-2 align-items-center">
+                                            <div className="col-md-11">
                                                 <input
                                                     type="text"
                                                     className="form-control"
@@ -279,33 +283,26 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
                                                     onChange={(e) => handleNoteChange(idx, 'note', e.target.value)}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
-                                                <label className="form-label">Created At</label>
-                                                <input
-                                                    type="datetime-local"
-                                                    className="form-control"
-                                                    value={new Date(note.createdAt).toISOString().slice(0, 16)}
-                                                    onChange={(e) => handleNoteChange(idx, 'createdAt', e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="col-md-2">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-danger"
+                                            <div className="col-md-1 d-flex align-items-center justify-content-center">
+                                                <i
+                                                    className="bi bi-trash text-danger"
+                                                    style={{cursor: 'pointer', fontSize: '1.50em'}}
                                                     onClick={() => removeNote(idx)}
-                                                >
-                                                    Remove
-                                                </button>
+                                                    title="Remove note"
+                                                ></i>
                                             </div>
                                         </div>
                                     ))}
                                     <div className="mt-2">
-                                        <button type="button" className="btn btn-info" onClick={addNewNote}>
-                                            Add Note
-                                        </button>
+                                        <i
+                                            className="bi bi-plus-circle text-info"
+                                            style={{cursor: 'pointer', fontSize: '1.50em'}}
+                                            onClick={addNewNote}
+                                            title="Add Note"
+                                        ></i>
                                     </div>
 
-                                    <div className="mt-3">
+                                    <div className="mt-3 d-flex justify-content-end">
                                         <button type="button" className="btn btn-primary me-2"
                                                 onClick={handleAddNewRecord}>
                                             Save Record
@@ -377,9 +374,8 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
 
                                     <h6 className="mt-3">Notes</h6>
                                     {editFormData.recordNotes.map((note, idx) => (
-                                        <div key={idx} className="row mb-2 align-items-end">
-                                            <div className="col-md-5">
-                                                <label className="form-label">Note</label>
+                                        <div key={idx} className="row mb-2 align-items-center">
+                                            <div className="col-md-11">
                                                 <input
                                                     type="text"
                                                     className="form-control"
@@ -387,30 +383,23 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
                                                     onChange={(e) => handleNoteChange(idx, 'note', e.target.value)}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
-                                                <label className="form-label">Created At</label>
-                                                <input
-                                                    type="datetime-local"
-                                                    className="form-control"
-                                                    value={new Date(note.createdAt).toISOString().slice(0, 16)}
-                                                    onChange={(e) => handleNoteChange(idx, 'createdAt', e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="col-md-2">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-danger"
+                                            <div className="col-md-1 d-flex align-items-center justify-content-center">
+                                                <i
+                                                    className="bi bi-trash text-danger"
+                                                    style={{cursor: 'pointer', fontSize: '1.5rem' }}
                                                     onClick={() => removeNote(idx)}
-                                                >
-                                                    Remove
-                                                </button>
+                                                    title="Remove note"
+                                                ></i>
                                             </div>
                                         </div>
                                     ))}
                                     <div className="mt-2">
-                                        <button type="button" className="btn btn-info" onClick={addNewNote}>
-                                            Add Note
-                                        </button>
+                                        <i
+                                            className="bi bi-plus-circle text-info"
+                                            style={{cursor: 'pointer', fontSize: '1.5rem'}}
+                                            onClick={addNewNote}
+                                            title="Add Note"
+                                        ></i>
                                     </div>
 
                                     <div className="mt-3">

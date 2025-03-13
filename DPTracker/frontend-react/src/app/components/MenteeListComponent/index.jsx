@@ -37,7 +37,7 @@ export function MenteeListComponent({
                                     <td onClick={(e) => e.stopPropagation()} className="text-center" style={{width: '50px'}}>
                                         <i
                                             className="bi bi-trash text-danger"
-                                            style={{cursor: 'pointer'}}
+                                            style={{cursor: 'pointer', fontSize: '1.50em'}}
                                             onClick={() => handleDeleteMentee(mentee.deliveryProfessionalId)}
                                             title="Remove mentee"
                                         ></i>

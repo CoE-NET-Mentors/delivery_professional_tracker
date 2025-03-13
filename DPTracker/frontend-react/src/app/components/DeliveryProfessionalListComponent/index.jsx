@@ -44,7 +44,7 @@ export function DeliveryProfessionalListComponent({
                                     <td className="text-center" style={{width: '50px'}}>
                                         <i
                                             className="bi bi-plus-circle text-success"
-                                            style={{cursor: 'pointer'}}
+                                            style={{cursor: 'pointer', fontSize: '1.50em'}}
                                             onClick={() => handleAddSpecificMentee(prof.id)}
                                             title="Add as Mentee"
                                         ></i>
