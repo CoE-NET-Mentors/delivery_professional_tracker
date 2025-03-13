@@ -10,7 +10,7 @@
         {
             foreach (var m in menteeList)
             {
-                this.Add(new Mentee(m.Id, m.DeliveryProfessional.DisplayName, m.DeliveryProfessionalId));
+                this.Add(new Mentee(m.Id, m.DeliveryProfessional.DisplayName, m.DeliveryProfessional.Email, m.DeliveryProfessionalId));
             }
         }
     }

@@ -142,130 +142,25 @@ export function MentorPage() {
                         <>
                             <div className="row mb-4">
                                 <div className="col-12">
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <h4>Add New Mentee</h4>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="mb-3">
-                                                <div className="input-group">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Search for delivery professionals..."
-                                                        value={searchMentee}
-                                                        onChange={(e) => {
-                                                            setSearchMentee(e.target.value);
-                                                            searchMenteeHandler(e.target.value);
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {searchResults.length > 0 && (
-                                                <div className="table-responsive">
-                                                    <table className="table table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>Email</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        {searchResults.map(prof => (
-                                                            <tr key={prof.id}>
-                                                                <td>{prof.displayName}</td>
-                                                                <td>{prof.email}</td>
-                                                                <td>
-                                                                    <button
-                                                                        className="btn btn-primary btn-sm"
-                                                                        onClick={() => handleAddSpecificMentee(prof.id)}
-                                                                    >
-                                                                        Add as Mentee
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            )}
-
-                                            {searchMentee.length >= 2 && searchResults.length === 0 && (
-                                                <div className="alert alert-info">
-                                                    No delivery professionals found or all are already your mentees
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <DeliveryProfessionalListComponent
+                                        searchMentee={searchMentee}
+                                        setSearchMentee={setSearchMentee}
+                                        searchMenteeHandler={searchMenteeHandler}
+                                        searchResults={searchResults}
+                                        handleAddSpecificMentee={handleAddSpecificMentee}
+                                    />
                                 </div>
                             </div>
 
                             <div className="row mb-4">
                                 <div className="col-12">
-                                    <div className="card">
-                                        <div className="card-header">
-                                            <h4>Current Mentees</h4>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="table-responsive">
-                                                <table className="table table-bordered table-hover">
-                                                    <thead className="table-light">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {mentees.length === 0 ? (
-                                                        <tr>
-                                                            <td colSpan="3" className="text-center">No mentees
-                                                                assigned
-                                                            </td>
-                                                        </tr>
-                                                    ) : (
-                                                        mentees.map(mentee => (
-                                                            <tr key={mentee.deliveryProfessionalId}>
-                                                                <td>{mentee.displayName}</td>
-                                                                <td>{mentee.emailAddress}</td>
-                                                                <td>
-                                                                    <div className="btn-group">
-                                                                        <button
-                                                                            className="btn btn-sm btn-info me-1"
-                                                                            onClick={() => handleMenteeRecordsModal(mentee.deliveryProfessionalId)}
-                                                                        >
-                                                                            View Records
-                                                                        </button>
-                                                                        <button
-                                                                            className="btn btn-sm btn-danger"
-                                                                            onClick={() => handleDeleteMentee(mentee.deliveryProfessionalId)}
-                                                                        >
-                                                                            Remove
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))
-                                                    )}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <MenteeListComponent
+                                        mentees={mentees}
+                                        handleMenteeRecordsModal={handleMenteeRecordsModal}
+                                        handleDeleteMentee={handleDeleteMentee}
+                                    />
                                 </div>
                             </div>
-                            {/*<MenteeListComponent
-                                mentees={mentees}
-                                handleMenteeRecordsModal={handleMenteeRecordsModal}
-                            />*/}
-
-                            {/*<DeliveryProfessionalListComponent
-                                deliveryProfessionals={deliveryProfessionals}
-                                searchTermHandler={searchTermHandler}
-                                fetchMenteeRecords={handleMenteeRecordsModal}
-                            />*/}
                             <RecordsModalComponent
                                 modalId={recordsModalId}
                                 records={selectedMenteeRecords}

@@ -1,6 +1,10 @@
-import React from 'react';
-
-export function DeliveryProfessionalListComponent({searchResults, searchMentee, handleAddSpecificMentee, onSearchChange}) {
+export function DeliveryProfessionalListComponent({
+                                                      searchMentee,
+                                                      setSearchMentee,
+                                                      searchMenteeHandler,
+                                                      searchResults,
+                                                      handleAddSpecificMentee
+                                                  }) {
     return (
         <div className="card">
             <div className="card-header">
@@ -14,7 +18,10 @@ export function DeliveryProfessionalListComponent({searchResults, searchMentee, 
                             className="form-control"
                             placeholder="Search for delivery professionals..."
                             value={searchMentee}
-                            onChange={onSearchChange}
+                            onChange={(e) => {
+                                setSearchMentee(e.target.value);
+                                searchMenteeHandler(e.target.value);
+                            }}
                         />
                     </div>
                 </div>
@@ -26,21 +33,21 @@ export function DeliveryProfessionalListComponent({searchResults, searchMentee, 
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             {searchResults.map(prof => (
                                 <tr key={prof.id}>
                                     <td>{prof.displayName}</td>
-                                    <td>{prof.emailAddress || prof.email}</td>
-                                    <td>
-                                        <button
-                                            className="btn btn-primary btn-sm"
+                                    <td>{prof.email}</td>
+                                    <td className="text-center" style={{width: '50px'}}>
+                                        <i
+                                            className="bi bi-plus-circle text-success"
+                                            style={{cursor: 'pointer'}}
                                             onClick={() => handleAddSpecificMentee(prof.id)}
-                                        >
-                                            Add as Mentee
-                                        </button>
+                                            title="Add as Mentee"
+                                        ></i>
                                     </td>
                                 </tr>
                             ))}

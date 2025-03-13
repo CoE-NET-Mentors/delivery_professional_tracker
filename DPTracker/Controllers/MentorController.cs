@@ -146,7 +146,6 @@ namespace DPTracker.Controllers
             [FromBody] CreateNewRecord record)
         {
             var records = await _graphService.UpdateMenteeRecord(menteeId, recordId, record);
-            if (records.Count == 0) return NotFound();
             return Ok(records);
         }
 
@@ -155,7 +154,6 @@ namespace DPTracker.Controllers
         public async Task<ActionResult> DeleteMenteeRecord(Guid menteeId, Guid recordId)
         {
             var records = await _graphService.DeleteMenteeRecord(menteeId, recordId);
-            if (records.Count == 0) return NotFound();
             return Ok(records);
         }
     }
