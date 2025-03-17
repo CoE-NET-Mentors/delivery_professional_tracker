@@ -68,19 +68,6 @@ export function MentorPage() {
       }
     }
 
-    async function searchTermHandler(searchTerm) {
-        if (token !== null && (searchTerm ?? '').length >= 3) {
-            const response = await ApiService.searchDeliveryProfessionals(token, searchTerm);
-            const uniqueDeliveryProfessionals = response.reduce((acc, obj) => {
-                if (!acc.some(o => o.id === obj.id)) {
-                    acc.push(obj);
-                }
-                return acc;
-            }, []);
-            setDeliveryProfessionals(uniqueDeliveryProfessionals);
-        }
-    }
-
     async function searchMenteeHandler(searchTerm) {
         if (token !== null && searchTerm.length >= 2) {
             const response = await ApiService.searchDeliveryProfessionals(token, searchTerm);

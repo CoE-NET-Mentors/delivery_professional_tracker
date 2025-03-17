@@ -43,7 +43,6 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
 
             const formattedRecord = {
                 createdBy: editFormData.createdBy,
-                deliveryProfessionalId: menteeId,
                 dateAssigned: new Date(editFormData.dateAssigned).toISOString(),
                 dateCompleted: editFormData.dateCompleted ? new Date(editFormData.dateCompleted).toISOString() : null,
                 recordTypeId: parseInt(editFormData.recordType),
@@ -89,7 +88,7 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
         setEditFormData({
             createdBy: record.createdBy,
             dateAssigned: new Date(record.dateAssigned).toISOString().slice(0, 16),
-            dateCompleted: new Date(record.dateCompleted).toISOString().slice(0, 16),
+            dateCompleted: record.dateCompleted ? new Date(record.dateCompleted).toISOString().slice(0, 16) : '',
             recordType: record.recordType,
             recordNotes: record.recordNotes || []
         });
@@ -123,7 +122,6 @@ export function RecordsModalComponent({modalId, records: initialRecords, menteeI
                 const formattedRecord = {
                     id: selectedRowId,
                     createdBy: editFormData.createdBy,
-                    deliveryProfessionalId: menteeId,
                     dateAssigned: new Date(editFormData.dateAssigned).toISOString(),
                     dateCompleted: editFormData.dateCompleted ? new Date(editFormData.dateCompleted).toISOString() : null,
                     recordTypeId: parseInt(editFormData.recordType),
