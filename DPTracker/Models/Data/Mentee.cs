@@ -8,6 +8,8 @@ namespace DPTracker.Models.Data
         public Guid Id { get; set; }
         public Guid MentorId { get; set; }
         
+        public Guid DeliveryProfessionalId { get; set; }
+        
         [DeleteBehavior(DeleteBehavior.NoAction)]
         public Mentor Mentor { get; set; } = null!;
 

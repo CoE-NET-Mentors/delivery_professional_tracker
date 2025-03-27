@@ -1,17 +1,54 @@
-export function MenteeListComponent({ mentees, handleMenteeRecordsModal }) {
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+export function MenteeListComponent({
+                                       mentees,
+                                       handleMenteeRecordsModal,
+                                       handleDeleteMentee
+                                   }) {
     return (
-        <div>
-            <h3>Mentees</h3>
-            <ul className="list-group">
-                {mentees.map(mentee => (
-                    <li key={mentee.id} className="list-group-item d-flex justify-content-between">
-                        {mentee.displayName}
-                        <div>
-                            <button className='btn btn-sm btn-info me-2' onClick={() => handleMenteeRecordsModal(mentee.id)}>Edit</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+        <div className="card">
+            <div className="card-header">
+                <h4>Current Mentees</h4>
+            </div>
+            <div className="card-body">
+                <div className="table-responsive">
+                    <table className="table table-bordered table-hover">
+                        <thead className="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {mentees.length === 0 ? (
+                            <tr>
+                                <td colSpan="3" className="text-center">No mentees assigned</td>
+                            </tr>
+                        ) : (
+                            mentees.map(mentee => (
+                                <tr
+                                    key={mentee.deliveryProfessionalId}
+                                    onClick={() => handleMenteeRecordsModal(mentee.deliveryProfessionalId)}
+                                    style={{cursor: 'pointer'}}
+                                >
+                                    <td>{mentee.displayName}</td>
+                                    <td>{mentee.email}</td>
+                                    <td onClick={(e) => e.stopPropagation()} className="text-center" style={{width: '50px'}}>
+                                        <i
+                                            className="bi bi-trash text-danger"
+                                            style={{cursor: 'pointer', fontSize: '1.50em'}}
+                                            onClick={() => handleDeleteMentee(mentee.deliveryProfessionalId)}
+                                            title="Remove mentee"
+                                        ></i>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 }
